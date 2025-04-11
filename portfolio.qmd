@@ -1,0 +1,63 @@
+---
+title: "Portfolio"
+author: "Bianca Rodas"
+format: html
+---
+
+## Data Description
+
+Link: https://github.com/rfordatascience/tidytuesday/blob/main/data/2021/2021-01-26/readme.md
+
+Description: The dataset is gathered through organized plastic waste audits and clean-up events on a global scale. This dataset holds record of the date, location, brand name, types of plastic, and quantity.
+
+Questions:
+1.How does branded plastics compare to unbranded plastics collected?  
+2.Which brands were most associated with the plastic found?
+3.Which plastics types were more commonly found? Which is the least?
+
+
+## Data Visualization
+
+What do you want your final visualizations to look like?
+> I want to have a bar graph comparing total counts of branded and unbranded plastics collected.
+> Second visualization will be another bar graph with total counts of plastics for the top 10 brands found.
+>Third visual could be a boxplot of different plastic types. 
+
+What do you want to highlight on your final visualizations in order to answer your research questions? How do you plan to do that?
+> I want to emphasize the top contributors to plastic pollution by filtering the top 10.
+
+What is missing from your data or would need to change in your data to create these visualizations?
+>I would need to use pivot to change the plastic types from columns to a new variable.I also need to group the companies and summarise the total counts.
+
+
+## Data Cleaning
+
+Do you need to reformat any variables into different types (e.g. factors, time, dates, strings)? Or remove information from variable values?
+> no
+
+Do you need to deal with any missing data, especially missing data coded other than NA?
+> yes
+
+Do you need to filter your data? How?
+> yes, the top 10 highest counts of plastic collected by company
+
+Do you need to create any new variables? What variables? How?
+>no
+
+Do you need to add new data (join) to your data? What data? How?
+>no
+
+Are there any variables you can exclude from your data?
+>yes
+
+Do you need pivot your data in any way? Why? How?
+>yes, because the plastic types are column titles so I will use pivot_longer
+
+Do you need to summarize any of the variables? Which ones? How?
+>yes, the top 10 counts of plastics by company
+
+What other aspects of your data need to be “fixed” in order to make your data visualizations?
+>I don't think so.
+
+
+
