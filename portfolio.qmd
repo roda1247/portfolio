@@ -59,5 +59,72 @@ Do you need to summarize any of the variables? Which ones? How?
 What other aspects of your data need to be “fixed” in order to make your data visualizations?
 >I don't think so.
 
+```{r}
+#| Label: Loading-libraries
+#| echo: FALSE
+
+library(tidyverse)
+library(dplyr)
+library(viridis)
+```
+
+
+```{r}
+#| Label: Read-in-data
+#| echo: FALSE
+
+plastic <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-01-26/plastics.csv", na = c("NA", "n/a", "unknown", "null", "NULL"))
+
+```
+
+
+```{r}
+#| Label: Clean-data
+#| echo: FALSE
+
+plastic <- plastic |> 
+  mutate(brand= if_else(parent_company %in% c("Unbranded") | is.na(parent_company), "Unbranded", "Branded"))
+```
+
+
+```{r}
+top_companies <- plastic |> 
+  filter(!parent_company %in% c("Grand Total", "Unbranded") & !is.na(parent_company)) |> 
+  group_by(parent_company) |> 
+  summarise(sum_grand_total = sum(grand_total)) |> 
+  arrange(desc(sum_grand_total)) |> 
+  slice_head(n = 10)
+```
+
+## Visualizations
+
+```{r}
+ggplot(plastic, aes(x=brand, y=grand_total, fill=brand))+
+  geom_col()+
+  theme_bw()+
+  theme(legend.position = "none")+
+  scale_fill_viridis(discrete=T,
+                     option = "plasma",
+                     begin=0.2, 
+                     end=0.9)+
+  labs(x="",
+       y= "Plastic Counts",
+       title ="Plastic Found with an Associated Brand")
+```
+
+
+```{r}
+ggplot(top_companies, aes(x=sum_grand_total, 
+                              y=reorder(parent_company, (sum_grand_total))
+                              , fill= parent_company))+
+  geom_col(color="black",size=0.4)+
+  theme_bw()+
+  scale_fill_viridis_d(option = "plasma", guide = "colourbar")+
+  labs(title="Companies identified during plastic collection",
+       y= "",
+       x="Total Trash Count")
+```
+
+
 
 
